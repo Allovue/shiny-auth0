@@ -1,0 +1,11 @@
+[Service]
+ExecStart= /home/ubuntu/shiny-auth0/bin/www
+Restart=always
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=shiny-auth0
+Environment=NODE_ENV=production
+WorkingDirectory=/home/ubuntu/shiny-auth0
+
+[Install]
+WantedBy=multi-user.target
