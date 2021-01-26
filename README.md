@@ -1,13 +1,29 @@
 # Auth0 + Shiny proxy
-This server proxies a shiny instance protecting it with Auth0. We use this in front of shiny-server to authorize users of the MNPS PBB reporting app. The flow goes
+This is a nodeJS app that sits in front of our R Shiny reports app for MNPS and proxies requests to it. It allows us to manage auth using Auth0. All users of the MNPS PBB app are added on the Auth0.com admin panel. The user experiences the following flow when they visit the site:
 
 1. User visits mnps-pbb.allovue.com
-2. Nginx proxies the request to this, the shiny-auth0 node app, running on port 3000
-3. This app bounces the user to auth0.com where they login. They are checked against a list of users managed through our admin panel on auth0 who have been added to the MNPS-PBB "connection" or database managed on Auth0.com
+2. Nginx proxies the request to this shiny-auth0 node app, running on port 3000
+3. The shiny-auth0 node app bounces the user to auth0.com where they login. They are checked against a list of users managed through our admin panel on auth0 who have been added to the MNPS-PBB "connection" or database managed on Auth0.com. 
 4. A successfull login bounces the user to the callback URL which is then proxied via the shiny-auth0 node app to the shiny R app on port 3000.
 
 
-# Setup
+# Accessing the EC2 Server
+
+* The server is accessed using the `MNPS PBB.pem` file located in 1Password in the Customer VPN/DB Vault. Copy this file to your local machine.
+* SSH into the server with `ssh -i /path/to/MNPS\ PBB.pem ubuntu@mnps-pbb.allovue.com`
+
+# Important Notes and Paths
+
+*  Auth0 Admin information is located with Jason, Jake, and Josh as of January 26th, 2021
+*  This app is located at `/home/ubuntu/shiny-auth0` with a systemd service at `/etc/systemd/system/shiny-auth0.service` 
+*  The R Shiny App is located at `srv/shiny-server` with a systemd service at `/etc/systemd/system/shiny-server.service`
+*  Nginx's config is setup at `/etc/nginx/nginx.conf`
+
+# Commands
+
+* Restarting services: `sudo systemctl restart shiny-auth0`, `sudo systemctl restart shiny-server`, `sudo systemctl restart nginx`
+
+# Initial Setup
 
 This node app needs to be cloned or copied to the same server as the shiny R app. Instructions for setup of a basic shiny R server and setting up this shiny-auth0 proxy can be found here: https://auth0.com/blog/adding-authentication-to-shiny-server/
 
