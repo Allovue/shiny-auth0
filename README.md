@@ -5,6 +5,7 @@ This is a nodeJS app that sits in front of our R Shiny reports app for MNPS and 
 2. Nginx proxies the request to this shiny-auth0 node app, running on port 3000
 3. The shiny-auth0 node app bounces the user to auth0.com where they login. They are checked against a list of users managed through our admin panel on auth0 who have been added to the MNPS-PBB "connection" or database managed on Auth0.com. 
 4. A successful login bounces the user to the callback URL which is then proxied via the shiny-auth0 node app to the shiny R app on port 3000.
+5. Users should get redirected to http://mnps-pbb.allovue.com/reports/mnps-pbb
 
 
 # Accessing the EC2 Server
