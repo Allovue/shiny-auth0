@@ -4,7 +4,7 @@ This server proxies a shiny instance protecting it with Auth0. We use this in fr
 1. User visits mnps-pbb.allovue.com
 2. Nginx proxies the request to this, the shiny-auth0 node app, running on port 3000
 3. This app bounces the user to auth0.com where they login. They are checked against a list of users managed through our admin panel on auth0 who have been added to the MNPS-PBB "connection" or database managed on Auth0.com
-4. A successfull login bounces the user to the callback URL which is then proxied via this app to the shiny R app.
+4. A successfull login bounces the user to the callback URL which is then proxied via the shiny-auth0 node app to the shiny R app on port 3000.
 
 
 # Setup
