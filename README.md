@@ -1,5 +1,5 @@
 # Auth0 + Shiny proxy
-This is a nodeJS app that sits in front of our R Shiny reports app for MNPS and proxies requests to it. It allows us to manage auth using Auth0. All users of the MNPS PBB app are added on the Auth0.com admin panel. The user experiences the following flow when they visit the site:
+This is a nodeJS app that sits in front of our [R Shiny reports app for MNPS](https://github.com/Allovue/mnps-pbb) and proxies requests to it. It allows us to manage auth using Auth0. All users of the MNPS PBB app are added on the Auth0.com admin panel. The user experiences the following flow when they visit the site:
 
 1. User visits mnps-pbb.allovue.com
 2. Nginx proxies the request to this shiny-auth0 node app, running on port 3000
